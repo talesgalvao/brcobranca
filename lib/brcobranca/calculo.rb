@@ -31,6 +31,14 @@ module Brcobranca
       (total % 11)
     end
 
+    # Calcula módulo 11 com multiplicadores de 7 a 2
+    #
+    # @return [Integer]
+    def modulo11_base_7
+      total = self.multiplicador([2,3,4,5,6,7])
+      total % 11
+    end
+
     # Calcula módulo 11 com multiplicaroes de 2 a 9 segundo a BACEN.
     #
     # @return [Integer]

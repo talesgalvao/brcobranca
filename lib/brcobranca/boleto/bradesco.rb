@@ -34,6 +34,19 @@ module Brcobranca
         @numero_documento = valor.to_s.rjust(11, '0') if valor
       end
 
+      def nosso_numero_dv
+        modulo = "#{self.carteira}#{self.numero_documento}".modulo11_base_7
+
+        case modulo
+        when 0
+          return "0"
+        when 1
+          return "P"
+        else
+          return 11 - modulo
+        end
+      end
+
       # Nosso número para exibir no boleto.
       # @return [String]
       # @example
