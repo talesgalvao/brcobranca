@@ -126,7 +126,7 @@ module Brcobranca
 
           doc.define_tags do
             tag :grande, size: 13
-            tag :cedente_endereco, :size => 6
+            tag :pequeno, :size => 6
           end
         end
 
@@ -143,7 +143,7 @@ module Brcobranca
           doc.moveto x: '0.7 cm', y: '23.20 cm'
           doc.show boleto.cedente
           doc.moveto :x => '0.7 cm' , :y => '23 cm'
-          doc.show boleto.cedente_endereco, :tag => :cedente_endereco
+          doc.show boleto.cedente_endereco, :tag => :pequeno
           doc.moveto x: '11 cm', y: '23 cm'
           doc.show boleto.agencia_conta_boleto
           doc.moveto x: '14.2 cm', y: '23 cm'
@@ -160,10 +160,10 @@ module Brcobranca
           doc.show boleto.nosso_numero_boleto
           doc.moveto x: '16.5 cm', y: '22.2 cm'
           doc.show boleto.valor_documento.to_currency
-          doc.moveto x: '1.4 cm', y: '20.9 cm'
+          doc.moveto x: '0.7 cm', y: '20.75 cm'
           doc.show "#{boleto.sacado} - #{boleto.sacado_documento.formata_documento}"
-          doc.moveto x: '1.4 cm', y: '20.6 cm'
-          doc.show "#{boleto.sacado_endereco}"
+          doc.moveto x: '0.7 cm', y: '20.55 cm'
+          doc.show "#{boleto.sacado_endereco}", :tag => :pequeno
           # FIM Primeira parte do BOLETO
         end
 
@@ -181,7 +181,7 @@ module Brcobranca
           doc.moveto x: '16.5 cm', y: '16 cm'
           doc.show boleto.data_vencimento.to_s_br if boleto.data_vencimento
           doc.moveto x: '0.7 cm', y: '15.2 cm'
-          doc.show boleto.cedente
+          doc.show "#{boleto.cedente} - #{boleto.documento_cedente.formata_documento}"
           doc.moveto x: '16.5 cm', y: '15.2 cm'
           doc.show boleto.agencia_conta_boleto
           doc.moveto x: '0.7 cm', y: '14.4 cm'
