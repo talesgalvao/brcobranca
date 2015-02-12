@@ -70,7 +70,7 @@ module Brcobranca
         def modelo_carne(boleto, options = {})
           doc = Document.new paper: [21, 9]
 
-          colunas = calc_colunas 1
+          colunas = calc_colunas 0
           linhas = calc_linhas 0
 
           modelo_carne_load_background(doc, 0)
@@ -98,8 +98,8 @@ module Brcobranca
 
           max_per_page = 3
           curr_page_position = 0
-          heigth_template = 9 # altura do template é de 9 cm
-          initial_margin_bottom = 1.4 # margin inicial abaixo
+          heigth_template = 9.4 # altura do template é de 9 cm
+          initial_margin_bottom = 0 # margin inicial abaixo
 
           modelo_carne_define_tags(doc)
 
@@ -110,7 +110,7 @@ module Brcobranca
 
             modelo_carne_load_background doc, margin_bottom
 
-            colunas = calc_colunas 1
+            colunas = calc_colunas 0
             linhas = calc_linhas margin_bottom
 
             modelo_carne_build_data_left(doc, boleto, colunas, linhas)
@@ -137,7 +137,7 @@ module Brcobranca
           template_path = File.join(File.dirname(__FILE__), '..', '..', 'arquivos', 'templates', 'modelo_carne.eps')
           fail 'Não foi possível encontrar o template. Verifique o caminho' unless File.exist?(template_path)
 
-          doc.image template_path, x: 1, y: margin_bottom
+          doc.image template_path, x: 0, y: margin_bottom
         end
 
         # define os tamanhos
@@ -150,7 +150,7 @@ module Brcobranca
 
         # define as colunas do documento, conforme margem lateral esquerda
         def calc_colunas(margin_left)
-          colunas = [0.1, 3.4, 4.5, 7.1, 7.8, 8.5, 9.1, 9.7, 11, 12.4, 13.3, 15]
+          colunas = [0.6, 3.33, 4.2, 7.35, 8.9, 8.95, 10.6, 10.35, 12, 13.6, 14.55, 16.4]
 
           colunas.each_with_index do |v, i|
             colunas[i] = v + margin_left
@@ -161,7 +161,7 @@ module Brcobranca
 
         # define as linhas do documento conforme margem inferior
         def calc_linhas(margin_bottom)
-          linhas = [8.2, 7.5, 6.92, 6.34, 5.74, 5.1, 4.7, 4.3, 3.9, 3.5, 3.1, 2.32, 1.92, 1.69, 0.1]
+          linhas = [8.2, 7.55, 6.95, 6.34, 5.74, 5.1, 4.7, 4.3, 3.9, 3.5, 3.1, 2.32, 1.92, 1.69, 0.1]
 
           linhas.each_with_index do |v, i|
             linhas[i] = v + margin_bottom
@@ -173,13 +173,13 @@ module Brcobranca
         # aplica dados do lado esquerdo
         def modelo_carne_build_data_left(doc, boleto, colunas, linhas)
           # LOGOTIPO do BANCO
-          doc.image(boleto.logotipo, x: (colunas[0] - 0.1), y: linhas[0], zoom: 50)
+          doc.image(boleto.logotipo, x: (colunas[0] - 0.1), y: linhas[0])
 
           # Dados
 
           # Numero do banco
-          doc.moveto x: colunas[1], y: linhas[0]
-          doc.show "#{boleto.banco}-#{boleto.banco_dv}"
+          # doc.moveto x: colunas[1], y: linhas[0]
+          # doc.show "#{boleto.banco}-#{boleto.banco_dv}"
 
           # vencimento
           doc.moveto x: colunas[0], y: linhas[1]
@@ -212,7 +212,7 @@ module Brcobranca
           doc.image(boleto.logotipo, x: colunas[2], y: linhas[0], zoom: 50)
 
           # Numero do banco
-          doc.moveto x: colunas[4], y: linhas[0]
+          doc.moveto x: colunas[3], y: linhas[0]
           doc.show "#{boleto.banco}-#{boleto.banco_dv}", tag: :grande
 
           # linha digitavel
@@ -245,7 +245,7 @@ module Brcobranca
 
           # especie doc.
           doc.moveto x: colunas[8], y: linhas[3]
-          doc.show boleto.especie
+          doc.show boleto.especie_documento
 
           # aceite
           doc.moveto x: colunas[9], y: linhas[3]
@@ -268,15 +268,15 @@ module Brcobranca
 
           # especie
           doc.moveto x: colunas[5], y: linhas[4]
-          doc.show boleto.moeda
+          doc.show boleto.especie
 
           # quantidade
-          doc.moveto x: colunas[7], y: linhas[4]
-          doc.show boleto.quantidade
+          # doc.moveto x: colunas[7], y: linhas[4]
+          # doc.show boleto.quantidade
 
           # valor documento
-          doc.moveto x: colunas[8], y: linhas[4]
-          doc.show boleto.valor_documento.to_currency
+          # doc.moveto x: colunas[8], y: linhas[4]
+          # doc.show boleto.valor_documento.to_currency
 
           # valor do documento
           doc.moveto x: colunas[11], y: linhas[4]
@@ -297,11 +297,11 @@ module Brcobranca
           doc.show boleto.instrucao6
 
           # Sacado
-          doc.moveto x: colunas[2], y: linhas[11]
+          doc.moveto x: colunas[2] + 0.8, y: linhas[11] + 0.25
           doc.show "#{boleto.sacado} - #{boleto.sacado_documento.formata_documento}" if boleto.sacado && boleto.sacado_documento
 
           # Sacado endereço
-          doc.moveto x: colunas[2], y: linhas[12]
+          doc.moveto x: colunas[2] + 0.8, y: linhas[12] + 0.25
           doc.show "#{boleto.sacado_endereco}"
 
           # codigo de barras
