@@ -94,7 +94,8 @@ module Brcobranca
         # @option options [Symbol] :resolucao Resolução em pixels.
         # @option options [Symbol] :formato Formato desejado [:pdf, :jpg, :tif, :png, :ps, :laserjet, ... etc]
         def modelo_carne_multipage(boletos, options = {})
-          doc = Document.new paper: :A4
+          # 21 x 28.2 cm = 595 x 799 points
+          doc = Document.new paper: [21.032, 28.275]
 
           max_per_page = 3
           curr_page_position = 0
