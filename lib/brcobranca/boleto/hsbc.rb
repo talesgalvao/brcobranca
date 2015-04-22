@@ -6,6 +6,7 @@ module Brcobranca
       validates_length_of :agencia, maximum: 4, message: 'deve ser menor ou igual a 4 dígitos.'
       validates_length_of :numero_documento, maximum: 13, message: 'deve ser menor ou igual a 13 dígitos.'
       validates_length_of :conta_corrente, maximum: 7, message: 'deve ser menor ou igual a 7 dígitos.'
+      validates_length_of :convenio, is: 7, message: 'deve possuir 7 dígitos.'
 
       # Nova instancia do Hsbc
       # @param (see Brcobranca::Boleto::Base#initialize)
@@ -51,7 +52,7 @@ module Brcobranca
               data = "#{dia}#{mes}#{ano}"
 
               parte_1 = "#{numero_documento}#{numero_documento.modulo11_9to2_10_como_zero}#{codigo_servico}"
-              soma = parte_1.to_i + conta_corrente.to_i + data.to_i
+              soma = parte_1.to_i + convenio.to_i + data.to_i
               "#{parte_1}#{soma.to_s.modulo11_9to2_10_como_zero}"
             else
               fail 'data_vencimento não é uma data.'
@@ -96,10 +97,10 @@ module Brcobranca
         case carteira
           when 'CNR'
             dias_julianos = data_vencimento.to_juliano
-            "#{conta_corrente}#{numero_documento}#{dias_julianos}2"
+            "#{convenio}#{numero_documento}#{dias_julianos}2"
           when 'CSB'
             fail Brcobranca::NaoImplementado.new('Nosso número não definido.') unless @nosso_numero
-            "#{nosso_numero}#{agencia}#{conta_corrente}001"
+            "#{nosso_numero}#{agencia}#{convenio}001"
           else
             fail Brcobranca::NaoImplementado.new('Tipo de carteira não implementado.')
         end
