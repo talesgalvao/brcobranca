@@ -83,7 +83,7 @@ module Brcobranca
       # @example
       #  boleto.agencia_conta_boleto #=> "0061900"
       def agencia_conta_boleto
-        conta_corrente
+        convenio
       end
 
       # Segunda parte do código de barras.
