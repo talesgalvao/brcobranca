@@ -134,11 +134,11 @@ module Brcobranca
         def modelo_generico_cabecalho(doc, boleto)
           # INICIO Primeira parte do BOLETO
           # LOGOTIPO do BANCO
-          doc.image(boleto.logotipo, x: '0.5 cm', y: '23.85 cm', zoom: 80)
+          doc.image(boleto.logotipo, x: '0.5 cm', y: '23.88 cm', zoom: 80)
           # Dados
-          doc.moveto x: '5.2 cm', y: '23.85 cm'
+          doc.moveto x: '5.2 cm', y: '23.88 cm'
           doc.show "#{boleto.banco}-#{boleto.banco_dv}", tag: :grande
-          doc.moveto x: '7.5 cm', y: '23.85 cm'
+          doc.moveto x: '7.5 cm', y: '23.88 cm'
           doc.show boleto.codigo_barras.linha_digitavel, tag: :grande
           doc.moveto x: '0.7 cm', y: '23.20 cm'
           doc.show boleto.cedente
@@ -169,10 +169,10 @@ module Brcobranca
         def modelo_generico_rodape(doc, boleto)
           # INICIO Segunda parte do BOLETO BB
           # LOGOTIPO do BANCO
-          doc.image(boleto.logotipo, x: '0.5 cm', y: '16.8 cm', zoom: 80)
-          doc.moveto x: '5.2 cm', y: '16.8 cm'
+          doc.image(boleto.logotipo, x: '0.5 cm', y: '16.85 cm', zoom: 80)
+          doc.moveto x: '5.2 cm', y: '16.85 cm'
           doc.show "#{boleto.banco}-#{boleto.banco_dv}", tag: :grande
-          doc.moveto x: '7.5 cm', y: '16.8 cm'
+          doc.moveto x: '7.5 cm', y: '16.85 cm'
           doc.show boleto.codigo_barras.linha_digitavel, tag: :grande
           doc.moveto x: '0.7 cm', y: '16 cm'
           doc.show boleto.local_pagamento
@@ -203,17 +203,7 @@ module Brcobranca
           doc.moveto x: '16.5 cm', y: '13.5 cm'
           doc.show boleto.valor_documento.to_currency
           doc.moveto x: '0.7 cm', y: '12.7 cm'
-          doc.show boleto.instrucao1
-          doc.moveto x: '0.7 cm', y: '12.3 cm'
-          doc.show boleto.instrucao2
-          doc.moveto x: '0.7 cm', y: '11.9 cm'
-          doc.show boleto.instrucao3
-          doc.moveto x: '0.7 cm', y: '11.5 cm'
-          doc.show boleto.instrucao4
-          doc.moveto x: '0.7 cm', y: '11.1 cm'
-          doc.show boleto.instrucao5
-          doc.moveto x: '0.7 cm', y: '10.7 cm'
-          doc.show boleto.instrucao6
+          doc.text_area boleto.instrucao1, x: '0.7 cm', y: '12.7 cm', row_height: '0.35 cm', width: '14.1 cm'
           doc.moveto x: '1.2 cm', y: '8.8 cm'
           doc.show "#{boleto.sacado} - #{boleto.sacado_documento.formata_documento}" if boleto.sacado && boleto.sacado_documento
           doc.moveto x: '1.2 cm', y: '8.4 cm'
