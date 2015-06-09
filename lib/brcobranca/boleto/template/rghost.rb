@@ -125,8 +125,8 @@ module Brcobranca
           doc.use_template :template
 
           doc.define_tags do
-            tag :grande, size: 13
-            tag :pequeno, :size => 6
+            tag :grande,  size: 13
+            tag :pequeno, size: 6
           end
         end
 
@@ -159,7 +159,7 @@ module Brcobranca
           doc.moveto x: '16.5 cm', y: '22.2 cm'
           doc.show boleto.valor_documento.to_currency
           doc.moveto x: '0.7 cm', y: '20.75 cm'
-          doc.show "#{boleto.sacado} - #{boleto.sacado_documento.formata_documento}"
+          doc.show [boleto.sacado, boleto.sacado_documento.try(:formata_documento)].compact.join(' - ')
           doc.moveto x: '0.7 cm', y: '20.55 cm'
           doc.show "#{boleto.sacado_endereco}", :tag => :pequeno
           # FIM Primeira parte do BOLETO
@@ -205,7 +205,7 @@ module Brcobranca
           doc.moveto x: '0.7 cm', y: '12.7 cm'
           doc.text_area boleto.instrucao1, x: '0.7 cm', y: '12.7 cm', row_height: '0.35 cm', width: '14.1 cm'
           doc.moveto x: '1.2 cm', y: '8.8 cm'
-          doc.show "#{boleto.sacado} - #{boleto.sacado_documento.formata_documento}" if boleto.sacado && boleto.sacado_documento
+          doc.show [boleto.sacado, boleto.sacado_documento.try(:formata_documento)].compact.join(' - ')
           doc.moveto x: '1.2 cm', y: '8.4 cm'
           doc.show "#{boleto.sacado_endereco}"
           # FIM Segunda parte do BOLETO
