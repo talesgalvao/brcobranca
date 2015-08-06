@@ -22,6 +22,23 @@ module Brcobranca
       valor == 10 ? 0 : valor
     end
 
+    # Calcula o módulo 11 segundo a BACEN
+    #
+    # @return [Integer]
+    # @raise  [ArgumentError] Caso não seja um número inteiro.
+    # @param  [Hash] options Opções para o cálculo do módulo
+    # @option options [Hash] :mapeamento Mapeamento do valor final. Ex: { 10 => "X" }. Padrão: {}
+    # @option options [Array] :multiplicador Números a serem utilizados na multiplicação da direita para a esquerda. Padrão: [9 até 2]
+    def modulo11(options = {}, &_block)
+      options[:mapeamento] ||= {}
+      options[:multiplicador] ||= [9, 8, 7, 6, 5, 4, 3, 2]
+
+      total = multiplicador(options[:multiplicador])
+      valor = block_given? ? yield(total) : (total % 11)
+
+      options[:mapeamento][valor] || valor
+    end
+
     # Calcula módulo 11 com multiplicaroes de 9 a 2 segundo a BACEN.
     #
     # @return [Integer]
