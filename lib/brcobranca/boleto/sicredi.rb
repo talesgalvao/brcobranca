@@ -15,14 +15,14 @@ module Brcobranca
       validates_length_of :agencia, maximum: 4, message: 'deve ser menor ou igual a 4 dígitos.'
       validates_length_of :numero_documento, maximum: 5, message: 'deve ser menor ou igual a 5 dígitos.'
       validates_length_of :conta_corrente, maximum: 5, message: 'deve ser menor ou igual a 5 dígitos.'
-      validates_length_of :carteira, maximum: 2, message: 'deve ser menor ou igual a 2 dígitos.'
+      validates_length_of :carteira, maximum: 1, message: 'deve ser menor ou igual a 1 dígito.'
       validates_length_of :posto, maximum: 2, message: 'deve ser menor ou igual a 2 dígitos.'
       validates_length_of :byte_idt, is: 1, message: 'deve ser 1 se o numero foi gerado pela agencia ou 2-9 se foi gerado pelo beneficiário'
 
       # Nova instancia do Bradesco
       # @param (see Brcobranca::Boleto::Base#initialize)
       def initialize(campos = {})
-        campos = { carteira: '03', especie_documento: 'A' }.merge!(campos)
+        campos = { carteira: '1', especie_documento: 'A' }.merge!(campos)
         super(campos)
       end
 
@@ -37,7 +37,10 @@ module Brcobranca
       #
       # @return [String] 2 caracteres numéricos.
       def carteira=(valor)
-        @carteira = valor.to_s.rjust(2, '0') if valor
+        # 1 - Simples
+        # 2 - Caucionada
+        # 3 - Descontada
+        @carteira = valor
       end
 
       # Posto
@@ -80,14 +83,11 @@ module Brcobranca
       # Codigo referente ao tipo de cobrança
       # @return [String]: 1 caractere numérico
       def tipo_cobranca
+        # 1 - Com registro
+        # 3 - Sem registro
         '3'
       end
 
-      # Codigo referente ao tipo de carteira
-      # @return [String]: 1 caractere numérico
-      def tipo_carteira
-        '1' if carteira == '03'
-      end
       # Dígito verificador do nosso número
       # @return [Integer] 1 caracteres numéricos.
       def nosso_numero_dv
@@ -105,7 +105,7 @@ module Brcobranca
 
       # Segunda parte do código de barras.
       def codigo_barras_segunda_parte
-        campo_livre = "#{tipo_cobranca}#{tipo_carteira}#{nosso_numero_boleto.gsub(/\D/, '')}#{agencia_posto_conta}10"
+        campo_livre = "#{tipo_cobranca}#{carteira}#{nosso_numero_boleto.gsub(/\D/, '')}#{agencia_posto_conta}10"
         campo_livre + campo_livre.modulo11(mapeamento: mapeamento_para_modulo_11).to_s
       end
 
