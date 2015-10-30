@@ -16,6 +16,7 @@ module Brcobranca
       validates_length_of :numero_documento, maximum: 5, message: 'deve ser menor ou igual a 5 dígitos.'
       validates_length_of :conta_corrente, maximum: 5, message: 'deve ser menor ou igual a 5 dígitos.'
       validates_length_of :carteira, maximum: 2, message: 'deve ser menor ou igual a 2 dígitos.'
+      validates_length_of :posto, maximum: 2, message: 'deve ser menor ou igual a 2 dígitos.'
       validates_length_of :byte_idt, is: 1, message: 'deve ser 1 se o numero foi gerado pela agencia ou 2-9 se foi gerado pelo beneficiário'
 
       # Nova instancia do Bradesco
@@ -85,14 +86,13 @@ module Brcobranca
       # Codigo referente ao tipo de carteira
       # @return [String]: 1 caractere numérico
       def tipo_carteira
-        if carteira == '03'
-          '1'
-        end
+        '1' if carteira == '03'
       end
       # Dígito verificador do nosso número
       # @return [Integer] 1 caracteres numéricos.
       def nosso_numero_dv
-        "#{agencia_posto_conta}#{numero_documento_with_byte_idt}".modulo11_9to2
+        "#{agencia_posto_conta}#{numero_documento_with_byte_idt}"
+          .modulo11(mapeamento: mapeamento_para_modulo_11)
       end
 
       def agencia_conta_boleto
@@ -106,7 +106,16 @@ module Brcobranca
       # Segunda parte do código de barras.
       def codigo_barras_segunda_parte
         campo_livre = "#{tipo_cobranca}#{tipo_carteira}#{nosso_numero_boleto.gsub(/\D/, '')}#{agencia_posto_conta}10"
-        campo_livre + campo_livre.modulo11_9to2_10_como_zero.to_s
+        campo_livre + campo_livre.modulo11(mapeamento: mapeamento_para_modulo_11).to_s
+      end
+
+      private
+
+      def mapeamento_para_modulo_11
+        {
+          10 => 0,
+          11 => 0
+        }
       end
     end
   end
