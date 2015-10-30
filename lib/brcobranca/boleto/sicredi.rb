@@ -24,8 +24,8 @@ module Brcobranca
       def initialize(campos = {})
         campos = {
           especie_documento: 'A',
-          posto: custom_fields[:posto],
-          byte_idt: custom_fields[:byte]
+          posto: campos[:custom_fields][:posto],
+          byte_idt: campos[:custom_fields][:byte]
         }.merge!(campos)
 
         super(campos)
