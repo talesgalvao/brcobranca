@@ -207,6 +207,14 @@ module Brcobranca
         fail Brcobranca::NaoImplementado.new('Sobreescreva este método na classe referente ao banco que você esta criando')
       end
 
+      def custom_fields=(value)
+        @custom_fields = value
+      end
+
+      def custom_fields
+        @custom_fields || {}
+      end
+
       private
 
       # Monta a primeira parte do código de barras, que é a mesma para todos bancos.
