@@ -61,10 +61,15 @@ module Brcobranca
       # devido ao cálculo em ordem inversa em Brcobranca::Calculo pelo método `multiplicador`.
       #
       def nosso_numero_dv
-        "#{agencia}#{convenio}#{numero_documento}".modulo11(
-          multiplicador: [3, 7, 9, 1],
-          mapeamento: { 10 => 0, 11 => 0 }
-        ) { |t| 11 - (t % 11) }
+        convenio_dez_digitos = convenio.to_s.rjust(10, "0")
+
+        dv = "#{agencia}#{convenio_dez_digitos}#{numero_documento}".reverse.modulo11(
+          { multiplicador: [3, 1, 9, 7],
+          mapeamento: { 1 => 0 }}
+        )
+        dv = 11-dv unless dv.zero?
+
+        dv
       end
 
       # Modalidade de cobrança
