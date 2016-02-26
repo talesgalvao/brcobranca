@@ -102,6 +102,7 @@ module Brcobranca
     autoload :Sicoob,        'brcobranca/boleto/sicoob'
     autoload :Sicredi,       'brcobranca/boleto/sicredi'
     autoload :Santander,     'brcobranca/boleto/santander'
+    autoload :Citibank,      'brcobranca/boleto/citibank'
 
     # Módulos para classes de template
     module Template
