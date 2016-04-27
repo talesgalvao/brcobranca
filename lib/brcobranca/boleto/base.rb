@@ -125,6 +125,12 @@ module Brcobranca
         conta_corrente.modulo11_9to2
       end
 
+      # Carteira para exibição no boleto gerado
+      # @return [String]
+      def carteira_boleto
+        carteira
+      end
+
       # Dígito verificador do nosso número
       # @return [Integer] 1 caracteres numéricos.
       def nosso_numero_dv
