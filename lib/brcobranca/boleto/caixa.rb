@@ -12,6 +12,11 @@ module Brcobranca
         sem_registro: '2'
       }
 
+      SIGLA_CARTEIRA = {
+        '14' => 'RG',
+        '24' => 'SR'
+      }
+
       EMISSAO_BOLETO = {
         cedente: '4'
       }
@@ -46,6 +51,14 @@ module Brcobranca
       # @return [String]
       def banco_dv
         '0'
+      end
+
+      def carteira_boleto
+        unless SIGLA_CARTEIRA.key?(carteira)
+          fail Brcobranca::CarteiraInvalida.new("Não existe nenhuma sigla para a carteira #{carteira}")
+        end
+
+        SIGLA_CARTEIRA[carteira]
       end
 
       # Nosso número, 17 dígitos
