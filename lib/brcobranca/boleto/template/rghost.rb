@@ -162,6 +162,7 @@ module Brcobranca
           doc.show [boleto.sacado, boleto.sacado_documento.try(:formata_documento)].compact.join(' - ')
           doc.moveto x: '0.7 cm', y: '20.55 cm'
           doc.show "#{boleto.sacado_endereco}", :tag => :pequeno
+          doc.text_area boleto.info_recibo_pagador, x: '0.55 cm', y: '19.70 cm', row_height: 0.3, tag: :pequeno
           # FIM Primeira parte do BOLETO
         end
 
