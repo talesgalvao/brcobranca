@@ -61,6 +61,10 @@ module Brcobranca
         SIGLA_CARTEIRA[carteira]
       end
 
+      def info_recibo_pagador
+        "SAC CAIXA: 0800 726 0101 (informações, reclamações, sugestões e elogios)\nPara pessoas com deficiência auditiva ou de fala: 0800 726 2492\nOuvidoria: 0800 725 7474\ncaixa.gov.br"
+      end
+
       # Nosso número, 17 dígitos
       #  1 à 2: carteira
       #  3 à 17: campo_livre
