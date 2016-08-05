@@ -101,6 +101,11 @@ module Brcobranca
         File.join(File.dirname(__FILE__), '..', 'arquivos', 'logos', "#{class_name}.eps")
       end
 
+      # @return [String] Informações adicionar no recibo do pagador.
+      def info_recibo_pagador
+        ""
+      end
+
       # Dígito verificador do banco
       # @return [Integer] 1 caracteres numéricos.
       def banco_dv
