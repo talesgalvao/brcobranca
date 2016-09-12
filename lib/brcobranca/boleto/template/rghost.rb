@@ -126,7 +126,7 @@ module Brcobranca
 
           doc.define_tags do
             tag :grande,      size: 13
-            tag :grande_bolt, size: 13, name: "Helvetica-Bold"
+            tag :grande_bold, size: 13, name: "Helvetica-Bold"
             tag :pequeno,     size: 6
           end
         end
@@ -173,7 +173,7 @@ module Brcobranca
           # LOGOTIPO do BANCO
           doc.image(boleto.logotipo, x: '0.5 cm', y: '16.85 cm', zoom: 80)
           doc.moveto x: '5.2 cm', y: '16.85 cm'
-          doc.show "#{boleto.banco}-#{boleto.banco_dv}", tag: :grande_bolt
+          doc.show "#{boleto.banco}-#{boleto.banco_dv}", tag: :grande_bold
           doc.moveto x: '7.5 cm', y: '16.85 cm'
           doc.show boleto.codigo_barras.linha_digitavel, tag: :grande
           doc.moveto x: '0.7 cm', y: '16 cm'
