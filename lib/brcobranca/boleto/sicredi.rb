@@ -12,6 +12,9 @@ module Brcobranca
       # <b>REQUERIDO</b>: Byte de identificação do cedente do bloqueto utilizado para compor o nosso número.
       attr_accessor :byte_idt
 
+      # <b>REQUERIDO</b>: # Codigo referente ao tipo de cobrança caractere numérico # 1 - Com registro # 3 - Sem registro
+      attr_accessor :tipo_cobranca
+
       validates_length_of :agencia, maximum: 4, message: 'deve ser menor ou igual a 4 dígitos.'
       validates_length_of :numero_documento, maximum: 5, message: 'deve ser menor ou igual a 5 dígitos.'
       validates_length_of :conta_corrente, maximum: 5, message: 'deve ser menor ou igual a 5 dígitos.'
@@ -25,7 +28,8 @@ module Brcobranca
         campos = {
           especie_documento: 'A',
           posto: campos[:custom_fields][:posto],
-          byte_idt: campos[:custom_fields][:byte]
+          byte_idt: campos[:custom_fields][:byte],
+          tipo_cobranca: campos[:custom_fields][:tipo_cobranca]
         }.merge!(campos)
 
         super(campos)
@@ -61,6 +65,13 @@ module Brcobranca
         @conta_corrente = valor.to_s.rjust(5, '0') if valor
       end
 
+      # Codigo referente ao tipo de cobrança
+      # @return [String]: 1 caractere numérico
+      def tipo_cobranca
+        return '3' if @tipo_cobranca.try(:empty?)
+        @tipo_cobranca
+      end
+
       # Dígito verificador do banco
       # @return [String] 1 caractere.
       def banco_dv
@@ -83,14 +94,6 @@ module Brcobranca
       # @return [String] 5 caracteres numéricos.
       def numero_documento=(valor)
         @numero_documento = valor.to_s.rjust(5, '0') if valor
-      end
-
-      # Codigo referente ao tipo de cobrança
-      # @return [String]: 1 caractere numérico
-      def tipo_cobranca
-        # 1 - Com registro
-        # 3 - Sem registro
-        '3'
       end
 
       # Dígito verificador do nosso número
