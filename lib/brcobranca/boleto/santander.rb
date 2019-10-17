@@ -8,7 +8,7 @@ module Brcobranca
       attr_reader :seu_numero
 
       validates_length_of :agencia, maximum: 4, message: 'deve ser menor ou igual a 4 dígitos.'
-      validates_length_of :convenio, maximum: 7, message: 'deve ser menor ou igual a 7 dígitos.'
+      validates_length_of :convenio, maximum: 9, message: 'deve ser menor ou igual a 9 dígitos.'
       validates_length_of :numero_documento, maximum: 12, message: 'deve ser menor ou igual a 12 dígitos.'
       validates_length_of :seu_numero, maximum: 7, message: 'deve ser menor ou igual a 7 dígitos.'
 
