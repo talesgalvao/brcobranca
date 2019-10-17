@@ -17,7 +17,7 @@ describe Brcobranca::Boleto::Santander do
       sacado: 'Claudio Pozzebom',
       sacado_documento: '12345678900',
       agencia: '0059',
-      convenio: 1_899_775,
+      convenio: 123_456_789,
       numero_documento: '90000267'
     }
   end
@@ -58,7 +58,7 @@ describe Brcobranca::Boleto::Santander do
     expect(boleto_novo.sacado).to eql('Claudio Pozzebom')
     expect(boleto_novo.sacado_documento).to eql('12345678900')
     expect(boleto_novo.agencia).to eql('0059')
-    expect(boleto_novo.convenio).to eql('1899775')
+    expect(boleto_novo.convenio).to eql('123456789')
     expect(boleto_novo.numero_documento).to eql('90000267')
     expect(boleto_novo.carteira).to eql('102')
   end
