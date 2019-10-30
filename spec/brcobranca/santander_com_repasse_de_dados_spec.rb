@@ -21,6 +21,7 @@ describe Brcobranca::Boleto::SantanderComRepasseDeRegras do
       sacado: 'Claudio Pozzebom',
       sacado_documento: '12345678900',
       agencia: '0059',
+      carteira: '101',
       codigo_cedente: '002769131',
       linha_digitavel: '03399276911310000000200000101014381000000001000',
       codigo_barras: '03393810000000010009276913100000000000010101',
@@ -45,7 +46,6 @@ describe Brcobranca::Boleto::SantanderComRepasseDeRegras do
     expect(boleto_novo.valor).to eql(0.0)
     expect(boleto_novo.valor_documento).to eql(0.0)
     expect(boleto_novo.local_pagamento).to eql('QUALQUER BANCO ATÉ O VENCIMENTO')
-    expect(boleto_novo.carteira).to eql('102')
   end
 
   it 'Criar nova instancia com atributos válidos' do
@@ -69,7 +69,7 @@ describe Brcobranca::Boleto::SantanderComRepasseDeRegras do
     expect(boleto_novo.agencia).to eql('0059')
     expect(boleto_novo.convenio).to eql('002769131')
     expect(boleto_novo.numero_documento).to eql('90000267')
-    expect(boleto_novo.carteira).to eql('102')
+    expect(boleto_novo.carteira).to eql('101')
   end
 
   it 'Gerar boleto' do

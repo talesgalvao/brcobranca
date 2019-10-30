@@ -76,7 +76,7 @@ module Brcobranca
 
       # Validações
       validates_presence_of :agencia, :conta_corrente, :moeda, :especie_documento, :especie,
-                            :aceite, :numero_documento, :cedente_endereco,
+                            :aceite, :numero_documento, :cedente_endereco, :carteira,
                             message: 'não pode estar em branco.'
       validates_numericality_of :convenio, :agencia, :conta_corrente,
                                 :numero_documento, message: 'não é um número.', allow_nil: true
@@ -139,22 +139,6 @@ module Brcobranca
       # @return [String]
       def carteira_boleto
         carteira
-      end
-
-      # Dígito verificador do nosso número
-      # @return [Integer] 1 caracteres numéricos.
-      def nosso_numero_dv
-        numero_documento.modulo11_9to2
-      end
-
-      # @abstract Deverá ser sobreescrito para cada banco.
-      def nosso_numero_boleto
-        raise Brcobranca::NaoImplementado, 'Sobreescreva este método na classe referente ao banco que você esta criando'
-      end
-
-      # @abstract Deverá ser sobreescrito para cada banco.
-      def agencia_conta_boleto
-        raise Brcobranca::NaoImplementado, 'Sobreescreva este método na classe referente ao banco que você esta criando'
       end
 
       # Valor total do documento: <b>quantidate * valor</b>
