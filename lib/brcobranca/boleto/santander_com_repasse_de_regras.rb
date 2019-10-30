@@ -17,7 +17,7 @@ module Brcobranca
       LINHA_DIGITAVEL_REGEXP = /^(.{5})(.{5})(.{5})(.{6})(.{5})(.{6})(.{1})(.{14})$/.freeze
       VALID_LINHA_DIGITAVEL_REGEXP = /^(\d{5})(\d{5})(\d{23})(\d{14})$/.freeze
 
-      # Nova instancia do Santander
+      # Nova instancia do SantanderComRepasseDeRegras
       # @param (see Brcobranca::Boleto::Base#initialize)
       def initialize(campos = {})
         @codigo_cedente = campos.dig(:codigo_cedente)
@@ -25,8 +25,8 @@ module Brcobranca
         @codigo_barras = campos.dig(:codigo_barras)
         @linha_digitavel = campos.dig(:linha_digitavel)
 
-        campos[:carteira] = '102'
-        campos[:conta_corrente] = '00000'
+        campos[:carteira] = campos.fetch(:carteira) { '' }
+        campos[:conta_corrente] = campos.fetch(:conta_corrente) { '' }
 
         super(campos)
       end
@@ -55,7 +55,7 @@ module Brcobranca
 
       def linha_digitavel=(text)
         unless text =~ VALID_LINHA_DIGITAVEL_REGEXP
-          raise ArgumentError, "#{text} Precisa conter 47 caracteres numéricos."
+          raise ArgumentError, "#{text} Linha digitável precisa conter 47 caracteres numéricos."
         end
 
         @linha_digitavel = text.gsub(LINHA_DIGITAVEL_REGEXP, '\1.\2 \3.\4 \5.\6 \7 \8')
