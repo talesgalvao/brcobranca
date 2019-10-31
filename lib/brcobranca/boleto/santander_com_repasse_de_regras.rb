@@ -8,11 +8,9 @@ module Brcobranca
 
       validates_length_of :agencia, maximum: 4, message: 'deve ser menor ou igual a 4 dígitos.'
       validates_length_of :convenio, maximum: 9, message: 'deve ser menor ou igual a 9 dígitos.'
-      validates_length_of :numero_documento, maximum: 12,
-                                             message: 'deve ser menor ou igual a 12 dígitos.'
       validates_length_of :seu_numero, maximum: 15, message: 'deve ser menor ou igual a 15 dígitos.'
-      validates_length_of :nosso_numero_boleto, maximum: 12,
-                                                message: 'deve ser menor ou igual a 12 digitos'
+      validates_length_of :nosso_numero_boleto, maximum: 13,
+                                                message: 'deve ser menor ou igual a 13 digitos'
 
       LINHA_DIGITAVEL_REGEXP = /^(.{5})(.{5})(.{5})(.{6})(.{5})(.{6})(.{1})(.{14})$/.freeze
       VALID_LINHA_DIGITAVEL_REGEXP = /^(\d{5})(\d{5})(\d{23})(\d{14})$/.freeze
