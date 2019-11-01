@@ -96,8 +96,8 @@ module Brcobranca
 
   # Módulo para classes de boletos
   module Boleto
-    autoload :Base, 'brcobranca/boleto/base'
-    autoload :BaseV2, 'brcobranca/boleto/base_v2'
+    autoload :Base,          'brcobranca/boleto/base'
+    autoload :BaseV2,        'brcobranca/boleto/base_v2'
     autoload :BancoBrasil,   'brcobranca/boleto/banco_brasil'
     autoload :Itau,          'brcobranca/boleto/itau'
     autoload :Hsbc,          'brcobranca/boleto/hsbc'
