@@ -97,7 +97,7 @@ module Brcobranca
   # Módulo para classes de boletos
   module Boleto
     autoload :Base, 'brcobranca/boleto/base'
-    autoload :BaseSemOverride, 'brcobranca/boleto/base_sem_override'
+    autoload :BaseV2, 'brcobranca/boleto/base_v2'
     autoload :BancoBrasil,   'brcobranca/boleto/banco_brasil'
     autoload :Itau,          'brcobranca/boleto/itau'
     autoload :Hsbc,          'brcobranca/boleto/hsbc'
@@ -105,7 +105,7 @@ module Brcobranca
     autoload :Caixa,         'brcobranca/boleto/caixa'
     autoload :Sicoob,        'brcobranca/boleto/sicoob'
     autoload :Sicredi,       'brcobranca/boleto/sicredi'
-    autoload :SantanderComRepasseDeRegras, 'brcobranca/boleto/santander_com_repasse_de_regras'
+    autoload :SantanderV2,   'brcobranca/boleto/santander_v2'
     autoload :Santander,     'brcobranca/boleto/santander'
     autoload :Citibank,      'brcobranca/boleto/citibank'
 
