@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Brcobranca::Boleto::SantanderComRepasseDeRegras do
+describe Brcobranca::Boleto::SantanderV2 do
   before(:each) do
     @valid_attributes = {
       especie_documento: 'DS',

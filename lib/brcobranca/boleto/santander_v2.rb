@@ -2,7 +2,7 @@
 
 module Brcobranca
   module Boleto
-    class SantanderComRepasseDeRegras < BaseSemOverride
+    class SantanderV2 < BaseV2
       attr_accessor :seu_numero, :codigo_cedente, :codigo_barras
       attr_reader :linha_digitavel, :nosso_numero_boleto
 
