@@ -2,7 +2,7 @@
 
 module Brcobranca
   module Boleto
-    # Classe base para todas as classes de boletos
+    # Classe base sem necessidade de override por parte das classes filhas
     class BaseV2
       extend Template::Base
 
