@@ -81,8 +81,6 @@ module Brcobranca
       validates_numericality_of :convenio, :agencia, :conta_corrente,
                                 :numero_documento, message: 'não é um número.', allow_nil: true
 
-      NOME_BANCO = 'santander'
-
       # Nova instancia da classe Base
       # @param [Hash] campos
       def initialize(campos = {})
@@ -103,7 +101,7 @@ module Brcobranca
       # Logotipo do banco
       # @return [Path] Caminho para o arquivo de logotipo do banco.
       def logotipo
-        File.join(File.dirname(__FILE__), '..', 'arquivos', 'logos', "#{NOME_BANCO}.eps")
+        File.join(File.dirname(__FILE__), '..', 'arquivos', 'logos', "#{class_name.gsub('v2', '')}.eps")
       end
 
       # @return [String] Informações adicionar no recibo do pagador.
