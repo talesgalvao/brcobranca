@@ -94,12 +94,10 @@ module Brcobranca
         @linha_digitavel = linha_digitavel_bb.gsub(LINHA_DIGITAVEL_REGEXP, '\1.\2 \3.\4 \5.\6 \7 \8')
       end
 
-      def nosso_numero_boleto=(nosso_numero_bb)
-        ultima_posicao_nosso_numero_str = nosso_numero_bb.size - 1
-        nosso_numero_str = String.new(nosso_numero_bb)
+      # metodos inseridos p/ aceitar campos enviados pela classe printable.rb no recurrent
+      def nosso_numero_boleto=(_nosso_numero_bb); end
 
-        @nosso_numero_boleto = nosso_numero_str.insert(ultima_posicao_nosso_numero_str, '-')
-      end
+      def codigo_cedente=(_codigo_cedente_bb); end
     end
   end
 end
