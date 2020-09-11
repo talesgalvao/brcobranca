@@ -9,7 +9,14 @@ module Brcobranca
     #  Date.parse(2000-07-04).fator_vencimento #=> 1001
     def fator_vencimento
       data_base = Date.parse '1997-10-07'
-      Integer(self - data_base).to_s.rjust(4, '0')
+      fator_vencimento = Integer(self - data_base)
+
+      while fator_vencimento > 9999
+        data_base = data_base + 10000
+        fator_vencimento = Integer(self - data_base) + 1000
+      end
+
+      fator_vencimento.to_s
     end
 
     # Mostra a data em formato <b>dia/mês/ano</b>
