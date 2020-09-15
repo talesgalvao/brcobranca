@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 RSpec.describe Brcobranca::CalculoData do
   describe '#fator_vencimento' do
     it 'Calcula o fator de vencimento' do
