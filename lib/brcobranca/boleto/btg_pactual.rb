@@ -16,6 +16,20 @@ module Brcobranca
           '0'
         ].join
       end
+
+      def agencia_conta_boleto
+        "#{agencia} / #{conta_corrente}-#{conta_corrente_dv}"
+      end
+
+      def nosso_numero_boleto
+        numero_documento
+      end
+
+      private
+
+      def conta_corrente_dv
+        conta_corrente.modulo11_9to2_10_como_x
+      end
     end
   end
 end

@@ -60,4 +60,48 @@ RSpec.describe Brcobranca::Boleto::BtgPactual do
       expect(boleto_novo.codigo_barras[43]).to eq('0')
     end
   end
+
+  describe '#agencia_conta_boleto' do
+    let(:valid_attributes) do
+      {
+        agencia: '0050',
+        conta_corrente: '445757',
+        carteira: '1',
+        numero_documento: '123',
+        data_documento: Date.new(2025, 2, 20),
+        dias_vencimento: 3,
+        valor: 123.45
+      }
+    end
+
+    subject(:boleto_novo) do
+      described_class.new(valid_attributes)
+    end
+
+    it 'retorna a agência e conta corrente do boleto' do
+      expect(boleto_novo.agencia_conta_boleto).to eq('0050 / 0445757-9')
+    end
+  end
+
+  describe '#nosso_numero_boleto' do
+    let(:valid_attributes) do
+      {
+        agencia: '0050',
+        conta_corrente: '445757',
+        carteira: '1',
+        numero_documento: '123',
+        data_documento: Date.new(2025, 2, 20),
+        dias_vencimento: 3,
+        valor: 123.45
+      }
+    end
+
+    subject(:boleto_novo) do
+      described_class.new(valid_attributes)
+    end
+
+    it 'retorna a agência e conta corrente do boleto' do
+      expect(boleto_novo.nosso_numero_boleto).to eq('123')
+    end
+  end
 end
