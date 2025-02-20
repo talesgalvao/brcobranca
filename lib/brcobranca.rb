@@ -110,6 +110,7 @@ module Brcobranca
     autoload :Santander,     'brcobranca/boleto/santander'
     autoload :Citibank,      'brcobranca/boleto/citibank'
     autoload :CitibankV2,    'brcobranca/boleto/citibank_v2'
+    autoload :BtgPactual,    'brcobranca/boleto/btg_pactual'
 
     # Módulos para classes de template
     module Template
