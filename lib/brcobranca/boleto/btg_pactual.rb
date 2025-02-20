@@ -7,6 +7,10 @@ module Brcobranca
         '208'
       end
 
+      def banco_dv
+        '1'
+      end
+
       def codigo_barras_segunda_parte
         [
           agencia,
