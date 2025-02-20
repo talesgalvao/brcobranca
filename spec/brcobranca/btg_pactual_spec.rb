@@ -101,7 +101,7 @@ RSpec.describe Brcobranca::Boleto::BtgPactual do
     end
 
     it 'retorna a agência e conta corrente do boleto' do
-      expect(boleto_novo.nosso_numero_boleto).to eq('123')
+      expect(boleto_novo.nosso_numero_boleto).to eq('00000000123')
     end
   end
 end

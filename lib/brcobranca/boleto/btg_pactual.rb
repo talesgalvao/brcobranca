@@ -22,7 +22,7 @@ module Brcobranca
       end
 
       def nosso_numero_boleto
-        numero_documento
+        numero_documento.to_s.rjust(11, '0')
       end
 
       private
